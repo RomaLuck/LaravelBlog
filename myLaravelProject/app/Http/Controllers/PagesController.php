@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreatePostsRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -34,9 +35,15 @@ class PagesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(\App\Http\Requests\CreatePostsRequest $request)
     {
-        Post::create($request->all());
+        $input = $request->all();
+        if($file = $request->file('file')){
+        $name = $file->getClientOriginalName();
+        $file->move('images',$name);
+        $input['path']=$name;
+        }
+        Post::create($input);
         return redirect("/posts");
     }
 
