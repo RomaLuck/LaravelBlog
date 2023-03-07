@@ -9,7 +9,7 @@
     <div class="col-md-3 ">
 <form action="/posts/{{$post->id}}" method="post">
     {{ csrf_field() }}
-    @method('PUT')
+    <input type="hidden" name="_method" value="PUT">
     <div>
         <input type="text" class="form-control  mx-3 my-1" name="title" placeholder="title" value="{{$post->title}}">
     </div>
@@ -22,7 +22,7 @@
 </form>
 <form action="/posts/{{$post->id}}" method="post">
     {{ csrf_field() }}
-    @method('DELETE')
+    <input type="hidden" name="_method" value="DELETE">
     <div class="mx-3 my-1">
         <input type="submit" value="delete" class="btn btn-danger">
     </div>
