@@ -15,7 +15,7 @@
 
     <div class="row justify-content-center my-3">
         <div class="col-md-3">
-            <form action="/posts" method="post">
+            <form action="/posts" method="post" enctype="multipart/form-data">
                 @csrf
                 <div>
                     <input type="text" class="form-control" name="title" placeholder="title" aria-label="Имя">
@@ -23,7 +23,10 @@
                 <div>
                     <textarea class="form-control" name="body" id="" rows="5" cols="28" placeholder="body"></textarea>
                 </div>
-                <div>
+                <div class="my-1">
+                    <input class="form-control" type="file" name="file">
+                </div>
+                <div class="my-2">
                     <input type="submit" value="create" class="btn btn-primary">
                 </div>
             </form>
