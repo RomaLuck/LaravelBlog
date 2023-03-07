@@ -9,6 +9,5 @@
 <p>Your post:</p>
 <p>{{$post->title}}</p>
 <p>{{$post->body}}</p>
-<a href="{{route("posts.edit",$post->id)}}">Edit</a>
 
 @endsection
