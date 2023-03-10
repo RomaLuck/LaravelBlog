@@ -21,6 +21,7 @@ Posts
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Author</th>
                 <th>Title</th>
                 <th>Body</th>
                 <th>Photo</th>
@@ -32,6 +33,7 @@ Posts
             @foreach ($posts as $post)
             <tr>
                 <td>{{$post->id}}</td>
+                <td>{{$post->user->name}}</td>
                 <td>{{$post->title}}</td>
                 <td>{{$post->body}}</td>
                 <td><img height="100" src="images/{{$post->path}}" alt=""></td>
