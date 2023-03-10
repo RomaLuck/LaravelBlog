@@ -83,6 +83,7 @@ class PagesController extends Controller
     {
         $post = Post::find($id);
         $post->update($request->all());
+        session()->flash('updated','Post was updated');
         return redirect("posts");
     }
 
@@ -96,6 +97,7 @@ class PagesController extends Controller
     {
         $post = Post::find($id);
         $post->delete();
+        session()->flash('deleted','Post was deleted');
         return redirect("posts");
     }
 }

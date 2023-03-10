@@ -6,11 +6,21 @@ Posts
 
 @section('body')
 <div class="row text-center">
-        @if (session('createPost'))
-            <div class="alert alert-success">
-                {{session('createPost')}}
-            </div>
-        @endif
+    @if (session('createPost'))
+    <div class="alert alert-success">
+        {{session('createPost')}}
+    </div>
+    @endif
+    @if (session('updated'))
+    <div class="alert alert-success">
+        {{session('updated')}}
+    </div>
+    @endif
+    @if (session('deleted'))
+    <div class="alert alert-danger">
+        {{session('deleted')}}
+    </div>
+    @endif
     <div class="col-md-12">
         <h1>Hello</h1>
         <p>Your posts:</p>
@@ -51,8 +61,8 @@ Posts
             @endforeach
         </tbody>
     </table>
-<div>
-    <a href="posts/create" class="btn btn-primary mx-3">Create new post</a>
-</div>
+    <div>
+        <a href="posts/create" class="btn btn-primary mx-3">Create new post</a>
+    </div>
 
-@endsection
+    @endsection
