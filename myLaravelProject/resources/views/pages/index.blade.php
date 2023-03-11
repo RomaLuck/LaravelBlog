@@ -40,6 +40,10 @@ Posts
             </tr>
         </thead>
         <tbody>
+
+
+
+            @if (isset($posts))
             @foreach ($posts as $post)
             <tr>
                 <td>{{$post->id}}</td>
@@ -47,8 +51,13 @@ Posts
                 <td>{{$post->title}}</td>
                 <td>{{$post->body}}</td>
                 <td><img height="100" src="images/{{$post->path}}" alt=""></td>
-                <td><a class="btn btn-success" href="{{route("posts.edit",$post->id)}}">Edit</a></td>
                 <td>
+                    @can('update', $post)
+                    <a class="btn btn-success" href="{{route("posts.edit",$post->id)}}">Edit</a>
+                    @endcan
+                </td>
+                <td>
+                    @can('delete', $post)
                     <form action="/posts/{{$post->id}}" method="post">
                         {{ csrf_field() }}
                         @method('DELETE')
@@ -56,9 +65,12 @@ Posts
                             <input type="submit" value="delete" class="btn btn-danger">
                         </div>
                     </form>
+                    @endcan
                 </td>
             </tr>
             @endforeach
+            @endif
+
         </tbody>
     </table>
     <div>

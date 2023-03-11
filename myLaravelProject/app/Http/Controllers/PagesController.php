@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Session;
 
@@ -38,13 +39,14 @@ class PagesController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
+        $input['user_id'] = auth()->user()->id ?? 1; //if user is not authorized, then post is created by guest
         if ($file = $request->file('file')) {
             $fileName = $file->getClientOriginalName();
             $file->move('images', $fileName);
             $input['path'] = $fileName;
         }
         Post::create($input);
-        session()->flash('createPost','Post was created');
+        session()->flash('createPost', 'Post was created');
         return redirect("/posts");
     }
 
@@ -69,6 +71,7 @@ class PagesController extends Controller
     public function edit($id)
     {
         $post = Post::find($id);
+        $this->authorize('view', $post);
         return view("pages.edit", compact("post"));
     }
 
@@ -83,7 +86,7 @@ class PagesController extends Controller
     {
         $post = Post::find($id);
         $post->update($request->all());
-        session()->flash('updated','Post was updated');
+        session()->flash('updated', 'Post was updated');
         return redirect("posts");
     }
 
@@ -97,7 +100,7 @@ class PagesController extends Controller
     {
         $post = Post::find($id);
         $post->delete();
-        session()->flash('deleted','Post was deleted');
+        session()->flash('deleted', 'Post was deleted');
         return redirect("posts");
     }
 }
