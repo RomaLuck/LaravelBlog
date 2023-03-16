@@ -39,7 +39,7 @@ class PagesController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-        $input['user_id'] = auth()->user()->id ?? 1; //if user is not authorized, then post is created by guest
+        $input['user_id'] = auth()->user()->id;
         if ($file = $request->file('file')) {
             $fileName = $file->getClientOriginalName();
             $file->move('images', $fileName);
@@ -71,7 +71,6 @@ class PagesController extends Controller
     public function edit($id)
     {
         $post = Post::find($id);
-        $this->authorize('view', $post);
         return view("pages.edit", compact("post"));
     }
 
@@ -85,6 +84,7 @@ class PagesController extends Controller
     public function update(Request $request, $id)
     {
         $post = Post::find($id);
+        $this->authorize('update', $post);
         $post->update($request->all());
         session()->flash('updated', 'Post was updated');
         return redirect("posts");
@@ -99,6 +99,7 @@ class PagesController extends Controller
     public function destroy($id)
     {
         $post = Post::find($id);
+        $this->authorize('delete', $post);
         $post->delete();
         session()->flash('deleted', 'Post was deleted');
         return redirect("posts");

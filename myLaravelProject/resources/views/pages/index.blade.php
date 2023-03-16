@@ -52,12 +52,12 @@ Posts
                 <td>{{$post->body}}</td>
                 <td><img height="100" src="images/{{$post->path}}" alt=""></td>
                 <td>
-                    @can('update', $post)
+                    @if (auth()->user()->hasRole('Admin'))
                     <a class="btn btn-success" href="{{route("posts.edit",$post->id)}}">Edit</a>
-                    @endcan
+                    @endif
                 </td>
                 <td>
-                    @can('delete', $post)
+                    @if (auth()->user()->hasRole('Admin'))
                     <form action="/posts/{{$post->id}}" method="post">
                         {{ csrf_field() }}
                         @method('DELETE')
@@ -65,7 +65,7 @@ Posts
                             <input type="submit" value="delete" class="btn btn-danger">
                         </div>
                     </form>
-                    @endcan
+                    @endif
                 </td>
             </tr>
             @endforeach

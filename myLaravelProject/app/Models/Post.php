@@ -15,11 +15,12 @@ class Post extends Model
      *
      * @var array<int, string>
      */
+    // protected $guarded = [];
     protected $fillable = [
-        'title',
-        'body',
-        'path',
-        'user_id'
+    'title',
+    'body',
+    'user_id',
+    'path',
     ];
 
     public function user(){
