@@ -1,4 +1,16 @@
-h1
-{
-    color:aqua ;
+* {
+    margin: 0px;
+    padding: 0px;
+  }
+.container-fluid {
+    height: 100%;
+}
+
+h1 {
+    color: aqua;
+}
+.sidebar {
+    height: 100%;
+    top: 0;
+    bottom: 0;
 }
