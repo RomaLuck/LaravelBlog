@@ -6,11 +6,8 @@
 
 @section('body')
 <div class="container-md">
-    <picture>
-        <source srcset="sourceset" type="image/svg+xml">
-        <img src="" class="img-fluid" alt="image desc">
-      </picture>
-    <form action="" method="get">
+<div class="form mt-4">
+    <form action="" method="get" enctype="multipart/form-data">
         <div class="col-md-4">
           <label for="" class="form-label">Choose file</label>
           <input type="file" class="form-control" name="" id="" placeholder="">
@@ -29,6 +26,7 @@
           </div>
 
         </form>
+    </div>
 </div>
 
 

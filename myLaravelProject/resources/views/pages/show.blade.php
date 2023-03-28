@@ -1,4 +1,4 @@
-@extends('loyouts.app')
+@extends('loyouts.ap')
 
 @section('title')
     Post

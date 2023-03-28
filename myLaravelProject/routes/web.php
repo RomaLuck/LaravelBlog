@@ -16,18 +16,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
+Route::get('/', [PagesController::class,'index'])->name('welcome');
 
-Route::get('/admin', [AdminController::class,'index'])->middleware(['auth', 'verified'])->name('admin');
-
-Route::get('/admin/profile', [AdminController::class,'show']);
+// Route::get('/admin', [AdminController::class,'index'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/admin', [AdminController::class,'show'])->name('dashboard');
+    Route::get('/admin/posts', [AdminController::class,'index']);
+});
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/admin/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/admin/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/admin/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 Route::resource('posts',PagesController::class);

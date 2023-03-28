@@ -6,7 +6,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="{{ asset('css/index.css')}}">
     <!-- Bootstrap CSS v5.2.1 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 
@@ -21,47 +21,48 @@
             <div class="sidebar">
                 <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="height: 100%;">
                     <div class="position-sticky" style="top: 2rem;">
-                        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                            <svg class="bi me-2" width="40" height="200">
-                                <use xlink:href="#bootstrap"></use>
-                            </svg>
-                            <span class="fs-4">Sidebar</span>
-                        </a>
+                        <picture>
+                            <source srcset="sourceset" type="image">
+                            <img src="/images/{{Auth()->user()->path}}" class="img-fluid rounded-3" >
+                          </picture>
                         <hr>
                         <div class="container">
                             <ul class="nav nav-pills flex-column mb-auto">
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link text-white">
-                                        <svg class="bi me-2" width="16" height="16">
-                                            <use xlink:href="#home"></use>
-                                        </svg>
-                                        Home
-                                    </a>
-                                </li>
                                 <li>
-                                    <a href="#" class="nav-link text-white">
+                                    <a href="/admin" class="nav-link text-white">
                                         <svg class="bi me-2" width="16" height="16">
-                                            <use xlink:href="#speedometer2"></use>
+                                            <use xlink:href=""></use>
                                         </svg>
                                         Dashboard
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" class="nav-link text-white">
+                                    <a href="/admin/posts" class="nav-link text-white">
                                         <svg class="bi me-2" width="16" height="16">
                                             <use xlink:href="#table"></use>
                                         </svg>
-                                        Orders
+                                        Posts
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" class="nav-link text-white">
+                                    <a href="/admin/comments" class="nav-link text-white">
                                         <svg class="bi me-2" width="16" height="16">
-                                            <use xlink:href="#grid"></use>
+                                            <use xlink:href="#table"></use>
                                         </svg>
-                                        Products
+                                        Comments
                                     </a>
                                 </li>
+                                @if (Auth()->user()->hasRole('Admin'))
+                                <li>
+                                        <a href="#" class="nav-link text-white">
+                                            <svg class="bi me-2" width="16" height="16">
+                                                <use xlink:href="#grid"></use>
+                                            </svg>
+                                            Users
+                                        </a>
+                                    </li>
+                                    @endif
+
                                 <li>
                                     <a href="#" class="nav-link text-white">
                                         <svg class="bi me-2" width="16" height="16">
@@ -75,7 +76,7 @@
                         <hr>
                         <div class="dropdown">
                             <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+                                <img src="/images/{{Auth()->user()->path}}" alt="" width="32" height="32" class="rounded-circle me-2">
                                 <strong>mdo</strong>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1" style="">
@@ -195,7 +196,7 @@
     </script>
     <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.js"></script>
-    <script src="js/datatable.js"></script>
+    <script src="{{ asset('js/datatable.js')}}"></script>
 </body>
 
 </html>
