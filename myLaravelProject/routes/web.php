@@ -18,10 +18,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PagesController::class,'index'])->name('welcome');
 
-// Route::get('/admin', [AdminController::class,'index'])->middleware(['auth', 'verified'])->name('dashboard');
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/admin', [AdminController::class,'show'])->name('dashboard');
-    Route::get('/admin/posts', [AdminController::class,'index']);
+    Route::get('/admin', [AdminController::class,'showMain'])->name('dashboard');
+    Route::get('/admin/posts', [AdminController::class,'showPosts']);
+    Route::resource('/admin/users', AdminController::class);
 });
 
 Route::middleware('auth')->group(function () {

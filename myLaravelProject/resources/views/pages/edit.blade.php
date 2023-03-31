@@ -7,7 +7,7 @@
 @section('body')
 <div class="row justify-content-center my-3">
     <div class="col-md-3">
-        <form action="/posts/{{$post->id}}" method="post" enctype="multipart/form-data">
+        <form action="{{route('posts.update', $post->id)}}" method="post" enctype="multipart/form-data">
             @csrf
             @method('PATCH')
             <div>

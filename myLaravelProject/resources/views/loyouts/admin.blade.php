@@ -54,7 +54,7 @@
                                 </li>
                                 @if (Auth()->user()->hasRole('Admin'))
                                 <li>
-                                        <a href="#" class="nav-link text-white">
+                                        <a href="{{route('users.index')}}" class="nav-link text-white">
                                             <svg class="bi me-2" width="16" height="16">
                                                 <use xlink:href="#grid"></use>
                                             </svg>

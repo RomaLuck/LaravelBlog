@@ -7,25 +7,35 @@
 @section('body')
 <div class="container-md">
 <div class="form mt-4">
-    <form action="" method="get" enctype="multipart/form-data">
-        <div class="col-md-4">
-          <label for="" class="form-label">Choose file</label>
-          <input type="file" class="form-control" name="" id="" placeholder="">
+    <form action="{{route('users.update', $user->id)}}" method="post" enctype="multipart/form-data">
+        @csrf
+        @method('PATCH')
+        <div>
+            <label for="name">Name</label>
+            <input type="text" class="form-control" name="name" value="{{$user->name}}" aria-label="Имя">
         </div>
-        <div class="col-md-4">
-            <label for="" class="form-label">First name</label>
-            <input type="text" class="form-control" id="" value="{{$user->name}}" required>
-          </div>
-          <div class="col-md-4">
-            <label for="" class="form-label">Password</label>
-            <input type="password" class="form-control" name="" id="" placeholder="{{$user->password}}" required>
-          </div>
-          <div class="col-md-4">
-            <label for="" class="form-label">Email</label>
-            <input type="email" class="form-control" id="" value="{{$user->email}}" required>
-          </div>
-
-        </form>
+        <div>
+            <label for="email">Email</label>
+            <input type="email" class="form-control" name="email" value="{{$user->email}}" aria-label="Имя">
+        </div>
+        <div>
+            <label for="password">Password</label>
+            <input type="password" class="form-control" name="password" value="" aria-label="Имя">
+        </div>
+        <div class="my-1">
+            <input class="form-control" type="file" name="file">
+        </div>
+        <div class="my-2">
+            <input type="submit" value="update" class="btn btn-primary">
+        </div>
+    </form>
+    <form action="{{route('users.destroy',$user->id)}}" method="post" enctype="multipart/form-data">
+        @csrf
+        @method('DELETE')
+        <div class="my-2">
+            <input type="submit" value="delete" class="btn btn-danger">
+        </div>
+    </form>
     </div>
 </div>
 
