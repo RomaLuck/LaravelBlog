@@ -22,6 +22,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/admin', [AdminController::class,'showMain'])->name('dashboard');
     Route::get('/admin/posts', [AdminController::class,'showPosts']);
     Route::resource('/admin/users', AdminController::class);
+    Route::put('/admin/{user}/attach', [AdminController::class, 'attach'])->name('user.attach');
+    Route::put('/admin/{user}/detach', [AdminController::class, 'detach'])->name('user.detach');
 });
 
 Route::middleware('auth')->group(function () {

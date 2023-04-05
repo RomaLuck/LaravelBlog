@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -36,7 +37,8 @@ class AdminController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        return view("admin.users.profile", compact('user'));
+        $roles = Role::all();
+        return view("admin.users.profile", compact('user', 'roles'));
     }
 
     public function update($id)
@@ -58,5 +60,17 @@ class AdminController extends Controller
         return redirect('admin/users');
     }
 
+    public function attach(User $user)
+    {
+        $user->roles()->attach(request()->role);
+        session()->flash('attached', 'User attached successfully');
+        return back();
+    }
 
+    public function detach(User $user)
+    {
+        $user->roles()->detach(request()->role);
+        session()->flash('detached', 'User detached successfully');
+        return back();
+    }
 }
