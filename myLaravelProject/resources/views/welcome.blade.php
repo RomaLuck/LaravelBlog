@@ -1,5 +1,11 @@
 @extends('loyouts.ap')
 @section('body')
+<div class="row text-center">
+@if (session('created_user'))
+<div class="alert alert-success">
+    {{session('created_user')}}
+</div>
+@endif
 
 <div class="container">
     <div class="nav-scroller py-1 mb-2">

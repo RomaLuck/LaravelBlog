@@ -62,7 +62,7 @@ class AdminController extends Controller
 
     public function attach(User $user)
     {
-        $user->roles()->attach(request()->role);
+        $user->roles()->attach(request('role'));
         session()->flash('attached', 'User attached successfully');
         return back();
     }

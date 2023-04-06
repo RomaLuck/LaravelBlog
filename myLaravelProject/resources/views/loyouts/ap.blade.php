@@ -22,15 +22,31 @@
                 </button>
                 <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
                     <div class="offcanvas-header">
-                        <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Dark offcanvas</h5>
+                        @if (Route::has('login'))
+                        @auth
+                        <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Hello, {{Auth()->user()->name}}</h5>
+                        @endauth
+                        @endif
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-header">
+                        @if (Route::has('login'))
+                        @auth
+                        <form method="POST" action="/logout">
+                            @csrf
+                            <input type="submit" class="" value="Logout">
+                        </form>
+                        @endauth
+                        @endif
                     </div>
                     <div class="offcanvas-body">
                         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                             @if (Route::has('login'))
                             <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
                                 @auth
+                                @if (Auth()->user()->hasRole('Admin') or Auth()->user()->hasRole('Moderator'))
                                 <a href="{{ url('/admin') }}" class="nav-link active text-white" aria-current="page">Dashboard</a>
+                                @endif
                                 @else
                                 <a href="{{ route('login') }}" class="nav-link active text-white" aria-current="page">Log in</a>
 

@@ -16,14 +16,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [PagesController::class,'index'])->name('welcome');
+Route::get('/', [PagesController::class, 'index'])->name('welcome');
+Route::resource('posts', PagesController::class);
 
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/admin', [AdminController::class,'showMain'])->name('dashboard');
-    Route::get('/admin/posts', [AdminController::class,'showPosts']);
-    Route::resource('/admin/users', AdminController::class);
-    Route::put('/admin/{user}/attach', [AdminController::class, 'attach'])->name('user.attach');
-    Route::put('/admin/{user}/detach', [AdminController::class, 'detach'])->name('user.detach');
+Route::middleware(['auth', 'verified','moderator'])->group(function () {
+    Route::get('/admin', [AdminController::class, 'showMain'])->name('dashboard');
+    Route::get('/admin/posts', [AdminController::class, 'showPosts']);
+});
+
+Route::middleware(['auth', 'verified','admin'])->group(function () {
+Route::resource('/admin/users', AdminController::class);
+Route::put('/admin/{user}/attach', [AdminController::class, 'attach'])->name('user.attach');
+Route::put('/admin/{user}/detach', [AdminController::class, 'detach'])->name('user.detach');
 });
 
 Route::middleware('auth')->group(function () {
@@ -32,6 +36,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/admin/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::resource('posts',PagesController::class);
-
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
