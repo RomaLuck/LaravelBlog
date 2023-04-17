@@ -1,29 +1,23 @@
 @extends('loyouts.ap')
 
 @section('title')
-    Create post
+    Edit role
 @endsection
 
 @section('body')
 <div class="row justify-content-center my-3">
     <div class="col-md-3">
-        <form action="{{route('posts.update', $post->id)}}" method="post" enctype="multipart/form-data">
+        <form action="{{route('roles.update',$role->id)}}" method="post">
             @csrf
             @method('PATCH')
             <div>
-                <input type="text" class="form-control" name="title" value="{{$post->title}}" aria-label="Имя">
-            </div>
-            <div>
-                <textarea class="form-control" name="body" id="" rows="5" cols="28">{{$post->body}}</textarea>
-            </div>
-            <div class="my-1">
-                <input class="form-control" type="file" name="file">
+                <input type="text" class="form-control" name="roleName" value="{{$role->name}}" aria-label="Имя">
             </div>
             <div class="my-2">
                 <input type="submit" value="update" class="btn btn-primary">
             </div>
         </form>
-        <form action="/posts/{{$post->id}}" method="post" enctype="multipart/form-data">
+        <form action="{{route('roles.destroy',$role->id)}}" method="post">
             @csrf
             @method('DELETE')
             <div class="my-2">

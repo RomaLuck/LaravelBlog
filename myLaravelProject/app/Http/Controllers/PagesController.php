@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PostRequest;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -36,8 +37,9 @@ class PagesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
+        $request->validated();
         $input = $request->all();
         $input['user_id'] = auth()->user()->id;
         if ($file = $request->file('file')) {
@@ -46,8 +48,8 @@ class PagesController extends Controller
             $input['path'] = $fileName;
         }
         Post::create($input);
-        session()->flash('createPost', 'Post was created');
-        return redirect("/posts");
+        session()->flash('created', 'Post was created');
+        return redirect('/admin/posts');
     }
 
     /**
@@ -81,13 +83,13 @@ class PagesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PostRequest $request, $id)
     {
+        $request->validated();
         $post = Post::find($id);
-        $this->authorize('update', $post);
         $post->update($request->all());
         session()->flash('updated', 'Post was updated');
-        return redirect("posts");
+        return redirect('/admin/posts');
     }
 
     /**
@@ -99,7 +101,6 @@ class PagesController extends Controller
     public function destroy($id)
     {
         $post = Post::find($id);
-        $this->authorize('delete', $post);
         $post->delete();
         session()->flash('deleted', 'Post was deleted');
         return redirect("posts");

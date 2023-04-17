@@ -3,9 +3,9 @@
 @section('body')
 <div class="container-md">
     <div class="row text-center">
-        @if (session('createPost'))
+        @if (session('created'))
         <div class="alert alert-success">
-            {{session('createPost')}}
+            {{session('created')}}
         </div>
         @endif
         @if (session('updated'))

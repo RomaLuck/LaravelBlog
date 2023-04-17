@@ -56,21 +56,21 @@ class AdminController extends Controller
     {
         $user = User::find($id);
         $user->delete();
-        session()->flash('deleted', 'User deleted successfully');
+        session()->flash('deleted', 'User is deleted successfully');
         return redirect('admin/users');
     }
 
     public function attach(User $user)
     {
-        $user->roles()->attach(request('role'));
-        session()->flash('attached', 'User attached successfully');
+        $user->roles()->attach(request()->role);
+        session()->flash('attached', 'User is attached successfully');
         return back();
     }
 
     public function detach(User $user)
     {
         $user->roles()->detach(request()->role);
-        session()->flash('detached', 'User detached successfully');
+        session()->flash('detached', 'User is detached successfully');
         return back();
     }
 }
