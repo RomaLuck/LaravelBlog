@@ -7,7 +7,7 @@
 </div>
 @endif
 
-<div class="container">
+<div class="container-md">
     <div class="nav-scroller py-1 mb-2">
         <nav class="nav d-flex justify-content-between">
             <a class="p-2 link-secondary" href="#">World</a>
@@ -24,7 +24,7 @@
             <a class="p-2 link-secondary" href="#">Travel</a>
         </nav>
     </div>
-    <main class="container">
+    <main class="container-md">
         <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark">
             <div class="col-md-6 px-0">
                 <h1 class="display-4 fst-italic">Title of a longer featured blog post</h1>
@@ -79,7 +79,7 @@
                 </h3>
 @foreach ($posts as $post)
                 <article class="blog-post">
-                    <h2 class="blog-post-title">{{$post->title}}</h2>
+                    <h2 class="blog-post-title"><a href="{{route('posts.show',$post->id)}}">{{$post->title}}</a></h2>
                     <p class="blog-post-meta">{{$post->created_at}} by <a href="#">{{$post->user->name}}</a></p>
 
                     <p>{{$post->body}}</p>
@@ -87,10 +87,12 @@
 
                 @endforeach
 
-                <nav class="blog-pagination" aria-label="Pagination">
-                    <a class="btn btn-outline-primary" href="#">Older</a>
-                    <a class="btn btn-outline-secondary disabled" href="#" tabindex="-1" aria-disabled="true">Newer</a>
-                </nav>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ $posts->links('pagination::bootstrap-5') }}
+                        </div>
+                    </div>
 
             </div>
 
