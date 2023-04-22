@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -17,11 +18,13 @@ class PostFactory extends Factory
      */
     public function definition()
     {
+        $category = Category::inRandomOrder()->first();
         return [
             'title'=>fake()->sentence(),
-            'body'=>fake()->realText(),
+            'body'=>fake()->paragraph(),
             'path'=>(explode('/',(fake()->image('public/images'))))[2],
-            'user_id'=>User::factory()->make()
+            'user_id'=>User::factory()->make(),
+            'category_id'=>$category->id
         ];
     }
 }

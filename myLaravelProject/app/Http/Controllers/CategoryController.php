@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Role;
-use Illuminate\Support\Str;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
-class RoleController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,8 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = Role::all();
-        return view('admin.roles',compact('roles'));
+        $categories = Category::all();
+        return view('admin.categories', compact('categories'));
     }
 
     /**
@@ -37,11 +36,7 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        Role::create([
-            'name'=>$request->roleName,
-            'slug'=>Str::slug($request->roleName)
-        ]);
-        session()->flash('created','Role has been created');
+        Category::create($request->all());
         return back();
     }
 
@@ -64,8 +59,8 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        $role = Role::find($id);
-        return view('admin.role',compact('role'));
+        $category = Category::find($id);
+        return view('admin.category', compact('category'));
     }
 
     /**
@@ -77,14 +72,9 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $role = Role::find($id);
-        $data = ([
-            'name'=>$request->roleName,
-            'slug'=>Str::slug($request->roleName)
-        ]);
-        $role->update($data);
-        session()->flash('updated','Role has been created');
-        return redirect('/admin/roles');
+        $category = Category::find($id);
+        $category->update($request->all());
+        return redirect('admin.categories');
     }
 
     /**
@@ -95,9 +85,8 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        $role = Role::find($id);
-        $role->delete();
-        session()->flash('deleted','Role has been deleted');
-        return redirect('/admin/roles');
+        $category = Category::find($id);
+        $category->delete();
+        return back();
     }
 }

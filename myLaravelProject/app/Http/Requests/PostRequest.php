@@ -24,8 +24,8 @@ class PostRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|alpha_dash|max:255',
-            'body' => 'required|alpha_dash|max:255'
+            'title' => 'required|alpha_dash|max:100',
+            'body' => 'required|alpha_dash|max:10000'
         ];
     }
 }

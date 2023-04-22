@@ -30,6 +30,7 @@
                     <th>Author</th>
                     <th>Title</th>
                     <th>Body</th>
+                    <th>Category</th>
                     <th>Photo</th>
                     <th>Edit</th>
                     <th>Delete</th>
@@ -45,7 +46,8 @@
                     <td>{{$post->user->name}}</td>
                     <td>{{$post->title}}</td>
                     <td>{{$post->body}}</td>
-                    <td><img height="100" src="images/{{$post->path}}" alt=""></td>
+                    <td>{{$post->category->name??''}}</td>
+                    <td><img height="10" src="images/{{$post->path}}" alt=""></td>
                     <td>
                         @if (auth()->user()->hasRole('Admin'))
                         <a class="btn btn-success" href="{{route("posts.edit",$post->id)}}">Edit</a>

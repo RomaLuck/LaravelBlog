@@ -14,12 +14,20 @@
 
 
     <div class="row justify-content-center my-3">
-        <div class="col-md-3">
+        <div class="col-md-5">
             <form action="/posts" method="post" enctype="multipart/form-data">
                 @csrf
                 <div>
                     <input type="text" class="form-control" name="title" placeholder="title" aria-label="Имя">
                 </div>
+              <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+                @foreach ($categories as $category)
+                <input type="checkbox" class="btn-check" name="category" id="btncheck1" value="{{$category->id}}" autocomplete="off">
+                <label
+                  class="btn btn-outline-primary"
+                  for="btncheck1">{{$category->name}}</label>
+                @endforeach
+</div>
                 <div>
                     <textarea class="form-control" name="body" id="" rows="5" cols="28" placeholder="body"></textarea>
                 </div>

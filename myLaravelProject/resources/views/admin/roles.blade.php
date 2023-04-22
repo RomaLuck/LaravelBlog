@@ -23,13 +23,12 @@
     </div>
     <div class="row mt-2">
         <div class="col-md-5">
-            <h4>Create/update role</h4>
             <form action="{{route('roles.store')}}" method="post">
                 @csrf
                 <div class="mb-2">
                     <input type="text" class="form-control" name="roleName" id="" placeholder="Name">
                 </div>
-                <input type="submit" value="Create">
+                <input type="submit" value="Create" class="btn btn-primary">
             </form>
         </div>
     </div>

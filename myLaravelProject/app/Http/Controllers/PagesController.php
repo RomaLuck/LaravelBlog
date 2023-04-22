@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PostRequest;
+use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -18,7 +19,8 @@ class PagesController extends Controller
     public function index()
     {
         $posts = Post::paginate();
-        return view("welcome", compact("posts"));
+        $categories = Category::all();
+        return view("welcome", compact("posts","categories"));
     }
 
     /**
@@ -28,7 +30,8 @@ class PagesController extends Controller
      */
     public function create()
     {
-        return view("pages.create");
+        $categories = Category::all();
+        return view("pages.create",compact('categories'));
     }
 
     /**
@@ -42,12 +45,15 @@ class PagesController extends Controller
         $request->validated();
         $input = $request->all();
         $input['user_id'] = auth()->user()->id;
+        $input['category_id'] = intval($request->input('category'));
         if ($file = $request->file('file')) {
             $fileName = $file->getClientOriginalName();
             $file->move('images', $fileName);
             $input['path'] = $fileName;
         }
         Post::create($input);
+        // $category_id = $request->input('category');
+        // $post->category()->attach(intval($category_id));
         session()->flash('created', 'Post was created');
         return redirect('/admin/posts');
     }
@@ -103,6 +109,6 @@ class PagesController extends Controller
         $post = Post::find($id);
         $post->delete();
         session()->flash('deleted', 'Post was deleted');
-        return redirect("posts");
+        return back();
     }
 }
