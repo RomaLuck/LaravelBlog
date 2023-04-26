@@ -23,8 +23,8 @@
                     <div class="position-sticky" style="top: 2rem;">
                         <picture>
                             <source srcset="sourceset" type="image">
-                            <img src="/images/{{Auth()->user()->path}}" class="img-fluid rounded-3" >
-                          </picture>
+                            <img src="/images/{{Auth()->user()->path}}" class="img-fluid rounded-3">
+                        </picture>
                         <hr>
                         <div class="container">
                             <ul class="nav nav-pills flex-column mb-auto">
@@ -54,14 +54,14 @@
                                 </li>
                                 @if (Auth()->user()->hasRole('Admin'))
                                 <li>
-                                        <a href="{{route('users.index')}}" class="nav-link text-white">
-                                            <svg class="bi me-2" width="16" height="16">
-                                                <use xlink:href="#grid"></use>
-                                            </svg>
-                                            Users
-                                        </a>
-                                    </li>
-                                    @endif
+                                    <a href="{{route('users.index')}}" class="nav-link text-white">
+                                        <svg class="bi me-2" width="16" height="16">
+                                            <use xlink:href="#grid"></use>
+                                        </svg>
+                                        Users
+                                    </a>
+                                </li>
+                                @endif
 
                                 <li>
                                     <a href="{{route('roles.index')}}" class="nav-link text-white">
@@ -197,6 +197,17 @@
     <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.js"></script>
     <script src="{{ asset('js/datatable.js')}}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#options').click(function() {
+                if (this.checked) {
+                    $('input[type="checkbox"]').prop('checked', true);
+                } else {
+                    $('input[type="checkbox"]').prop('checked', false);
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

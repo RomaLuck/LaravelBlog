@@ -19,8 +19,16 @@ class PagesController extends Controller
     public function index()
     {
         $posts = Post::paginate();
+        $firstPost = Post::first();
+        $secondPost = Post::where('id',1)->first();
         $categories = Category::all();
-        return view("welcome", compact("posts","categories"));
+        $dates = Post::orderBy('created_at', 'desc')
+            ->pluck('created_at')
+            ->map(function ($date) {
+                return $date->format('F Y');
+            })
+            ->unique();
+        return view("welcome", compact("posts", "categories", "dates","firstPost","secondPost"));
     }
 
     /**
@@ -31,13 +39,13 @@ class PagesController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view("pages.create",compact('categories'));
+        return view("pages.create", compact('categories'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(PostRequest $request)
@@ -61,7 +69,7 @@ class PagesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -73,7 +81,7 @@ class PagesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -85,8 +93,8 @@ class PagesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(PostRequest $request, $id)
@@ -101,7 +109,7 @@ class PagesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

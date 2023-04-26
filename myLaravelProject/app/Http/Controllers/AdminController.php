@@ -73,4 +73,15 @@ class AdminController extends Controller
         session()->flash('detached', 'User is detached successfully');
         return back();
     }
+
+
+    public function deleteAll(Request $request)
+    {
+        $posts = Post::find($request->checkBoxArray);
+        foreach ($posts as $post)
+        {
+            $post->delete();
+        }
+        return back();
+    }
 }

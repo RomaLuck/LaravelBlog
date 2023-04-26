@@ -24,6 +24,7 @@ Route::resource('posts', PagesController::class);
 Route::middleware(['auth', 'verified', 'moderator'])->group(function () {
     Route::get('/admin', [AdminController::class, 'showMain'])->name('dashboard');
     Route::get('/admin/posts', [AdminController::class, 'showPosts']);
+    Route::delete('/admin/posts/delete', [AdminController::class, 'deleteAll']);
     Route::resource('/admin/categories', CategoryController::class);
 });
 
