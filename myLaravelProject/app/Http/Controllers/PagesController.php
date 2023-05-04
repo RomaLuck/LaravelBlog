@@ -18,9 +18,9 @@ class PagesController extends Controller
      */
     public function index()
     {
-        $posts = Post::paginate();
+        $posts = Post::latest()->filter(request(['category']))->paginate();
         $firstPost = Post::first();
-        $secondPost = Post::where('id',1)->first();
+        $secondPost = Post::where('id', 1)->first();
         $categories = Category::all();
         $dates = Post::orderBy('created_at', 'desc')
             ->pluck('created_at')
@@ -28,7 +28,7 @@ class PagesController extends Controller
                 return $date->format('F Y');
             })
             ->unique();
-        return view("welcome", compact("posts", "categories", "dates","firstPost","secondPost"));
+        return view("welcome", compact("posts", "categories", "dates", "firstPost", "secondPost"));
     }
 
     /**

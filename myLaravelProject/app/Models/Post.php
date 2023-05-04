@@ -33,4 +33,11 @@ class Post extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function scopeFilter($query, array $filters){
+        if($filters['category']?? false)
+        {
+            $query->where('category_id','like','%'.request('category').'%');
+        }
+    }
 }

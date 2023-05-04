@@ -1,4 +1,4 @@
-@extends('loyouts.admin')
+@extends('layouts.admin')
 
 @section('sidebar')
 <p>sidebar</p>

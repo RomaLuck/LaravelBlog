@@ -1,4 +1,4 @@
-@extends('loyouts.ap')
+@extends('layouts.main')
 @section('body')
     <div class="row text-center">
         @if (session('created_user'))
@@ -12,8 +12,9 @@
                 <div class="col-md-6 px-0 mx-auto">
                     <nav class="nav d-flex justify-content-between">
                         @foreach($categories as $category)
-                            <a class="p-2 link-secondary" href="#">{{$category->name}}</a>
+                            <a class="p-2 link-secondary" href="/?category={{$category->id}}">{{$category->name}}</a>
                         @endforeach
+                            <a class="p-2 link-secondary" href="/">All</a>
                     </nav>
                 </div>
             </div>

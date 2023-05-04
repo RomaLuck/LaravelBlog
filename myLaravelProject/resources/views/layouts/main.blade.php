@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Cache-Control" content="max-age=3600">
     <title>@yield('title')</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('css/index.css')}}">
@@ -13,7 +14,6 @@
 </head>
 
 <body>
-
     <nav class="navbar navbar-light bg-light fixed-top">
             <div class="container-fluid">
                 <a class="navbar-brand ms-4" href="#"></a>
@@ -56,12 +56,6 @@
                                 @endauth
                             </div>
                             @endif
-                            {{-- <li class="nav-item">
-                                <a class="nav-link active text-white" aria-current="page" href="/dashboard">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-white" href="/posts">Posts</a>
-                            </li> --}}
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Dropdown
