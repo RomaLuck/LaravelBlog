@@ -18,9 +18,9 @@ class PagesController extends Controller
      */
     public function index()
     {
-        $posts = Post::latest()->filter(request(['category']))->paginate();
+        $posts = Post::latest()->filter(request(['category','search','date']))->paginate(10);
         $firstPost = Post::first();
-        $secondPost = Post::where('id', 1)->first();
+        $secondPost = Post::where('id', 2)->first();
         $categories = Category::all();
         $dates = Post::orderBy('created_at', 'desc')
             ->pluck('created_at')

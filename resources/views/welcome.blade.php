@@ -9,7 +9,7 @@
 
         <div class="container-md">
             <div class="nav-scroller py-1 mb-2">
-                <div class="col-md-6 px-0 mx-auto">
+                <div class="col-md-10 px-0 mx-auto">
                     <nav class="nav d-flex justify-content-between">
                         @foreach($categories as $category)
                             <a class="p-2 link-secondary" href="/?category={{$category->id}}">{{$category->name}}</a>
@@ -30,8 +30,7 @@
 
                 <div class="row mb-2">
                     <div class="col-md-6">
-                        <div
-                            class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                             <div class="col p-4 d-flex flex-column position-static">
                                 <strong class="d-inline-block mb-2 text-primary">{{$firstPost->category->name}}</strong>
                                 <h3 class="mb-0">{{$firstPost->title}}</h3>
@@ -80,6 +79,7 @@
                             From the Firehose
                         </h3>
                         @foreach ($posts as $post)
+                        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                             <article class="blog-post">
                                 <h5 class="text-secondary" >{{$post->category->name}}</h5>
                                 <h2 class="blog-post-title"><a
@@ -89,6 +89,7 @@
 
                                 <p>{{Str::limit($post->body,'50','...')}}</p>
                             </article>
+                        </div>
                         @endforeach
                         <div class="row">
                             <div class="col-md-6">
@@ -110,7 +111,7 @@
                                 <h4 class="fst-italic">Archives</h4>
                                 <ol class="list-unstyled mb-0">
                                     @foreach($dates as $date)
-                                    <li><a href="#">{{$date}}</a></li>
+                                    <li><a href="/?date={{$date}}">{{$date}}</a></li>
                                     @endforeach
                                 </ol>
                             </div>

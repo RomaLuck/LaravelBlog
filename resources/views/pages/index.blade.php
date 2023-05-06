@@ -1,4 +1,4 @@
-@extends('loyouts.ap')
+@extends('layouts.main')
 
 @section('title')
 Posts
