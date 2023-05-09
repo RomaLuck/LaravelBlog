@@ -48,7 +48,7 @@ class AdminController extends Controller
         $user->email = request()->email;
         $user->password = Hash::make(request()->password);
         $user->update();
-        session()->flash('updated', 'Profile updated successfully');
+        session()->flash('message', 'Profile updated successfully');
         return redirect('admin/users');
     }
 
@@ -56,21 +56,21 @@ class AdminController extends Controller
     {
         $user = User::find($id);
         $user->delete();
-        session()->flash('deleted', 'User is deleted successfully');
+        session()->flash('message', 'User is deleted successfully');
         return redirect('admin/users');
     }
 
     public function attach(User $user)
     {
         $user->roles()->attach(request()->role);
-        session()->flash('attached', 'User is attached successfully');
+        session()->flash('message', 'User is attached successfully');
         return back();
     }
 
     public function detach(User $user)
     {
         $user->roles()->detach(request()->role);
-        session()->flash('detached', 'User is detached successfully');
+        session()->flash('message', 'User is detached successfully');
         return back();
     }
 

@@ -9,7 +9,7 @@
 
         <div class="container-md">
             <div class="nav-scroller py-1 mb-2">
-                <div class="col-md-10 px-0 mx-auto">
+                <div class="col-md-9 px-0 mx-auto">
                     <nav class="nav d-flex justify-content-between">
                         @foreach($categories as $category)
                             <a class="p-2 link-secondary" href="/?category={{$category->id}}">{{$category->name}}</a>
@@ -81,7 +81,7 @@
                         @foreach ($posts as $post)
                         <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                             <article class="blog-post">
-                                <h5 class="text-secondary" >{{$post->category->name}}</h5>
+                                <h5 class="text-secondary" >{{$post->category?->name}}</h5>
                                 <h2 class="blog-post-title"><a
                                         href="{{route('posts.show',$post->id)}}">{{$post->title}}</a></h2>
                                 <p class="blog-post-meta">{{$post->created_at}} by <a href="#">{{$post->user->name}}</a>

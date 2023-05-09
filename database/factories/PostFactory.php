@@ -2,8 +2,10 @@
 
 namespace Database\Factories;
 
-use App\Models\Category;
 use App\Models\User;
+use App\Models\Category;
+use Illuminate\Http\File;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -20,11 +22,10 @@ class PostFactory extends Factory
     {
         $category = Category::inRandomOrder()->first();
         return [
-            'title'=>fake()->sentence(),
-            'body'=>fake()->paragraph(),
-            'path'=>(explode('/',(fake()->image('public/images'))))[2],
-            'user_id'=>User::factory()->make(),
-            'category_id'=>$category->id
+            'title' => fake()->sentence(),
+            'body' => fake()->paragraph(),
+            'user_id' => User::factory()->make(),
+            'category_id' => $category->id
         ];
     }
 }

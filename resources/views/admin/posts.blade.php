@@ -3,19 +3,9 @@
 @section('body')
 <div class="container-md">
     <div class="row text-center">
-        @if (session('created'))
+        @if (session('message'))
         <div class="alert alert-success">
-            {{session('created')}}
-        </div>
-        @endif
-        @if (session('updated'))
-        <div class="alert alert-success">
-            {{session('updated')}}
-        </div>
-        @endif
-        @if (session('deleted'))
-        <div class="alert alert-danger">
-            {{session('deleted')}}
+            {{session('message')}}
         </div>
         @endif
         <div class="col-md-12 mt-4">
@@ -52,8 +42,8 @@
                         <td>{{$post->user->name}}</td>
                         <td>{{$post->title}}</td>
                         <td>{{$post->body}}</td>
-                        <td>{{$post->category->name??''}}</td>
-                        <td><img height="10" src="images/{{$post->path}}" alt=""></td>
+                        <td>{{$post->category?->name}}</td>
+                        <td><img height="75" src="{{asset('storage/'.$post->path)}}" alt=""></td>
                         <td>
                             @if (auth()->user()->hasRole('Admin'))
                             <a class="btn btn-success" href="{{route("posts.edit",$post->id)}}">Edit</a>

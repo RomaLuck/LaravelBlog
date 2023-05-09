@@ -49,7 +49,7 @@ Posts
                 <td>{{$post->user->name}}</td>
                 <td>{{$post->title}}</td>
                 <td>{{$post->body}}</td>
-                <td><img height="100" src="images/{{$post->path}}" alt=""></td>
+                <td><img height="100" src="storage/{{$post->path}}" alt=""></td>
                 <td>
                     @if (auth()->user()->hasRole('Admin'))
                     <a class="btn btn-success" href="{{route("posts.edit",$post->id)}}">Edit</a>

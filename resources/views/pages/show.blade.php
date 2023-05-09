@@ -8,6 +8,7 @@
 <div class="container-md">
 <div class="row">
     <div class="col-md-5 mx-auto">
+    <img src="{{asset('storage/'.$post->path)}}" alt="">
     <h1>{{$post->title}}</h1>
     <p>{{$post->body}}</p>
     <a class="btn btn-success pull-right mb-5" href="{{route('posts.index')}}">Back</a>

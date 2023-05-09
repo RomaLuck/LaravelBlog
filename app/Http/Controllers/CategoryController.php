@@ -37,7 +37,7 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         Category::create($request->all());
-        return back();
+        return back()->with('message','Category is created');
     }
 
     /**
@@ -74,6 +74,7 @@ class CategoryController extends Controller
     {
         $category = Category::find($id);
         $category->update($request->all());
+        session()->flash('message','Category is updated');
         return redirect('admin.categories');
     }
 
@@ -87,6 +88,6 @@ class CategoryController extends Controller
     {
         $category = Category::find($id);
         $category->delete();
-        return back();
+        return back()->with('message','Category is deleted');
     }
 }

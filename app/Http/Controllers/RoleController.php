@@ -41,7 +41,7 @@ class RoleController extends Controller
             'name'=>$request->roleName,
             'slug'=>Str::slug($request->roleName)
         ]);
-        session()->flash('created','Role has been created');
+        session()->flash('message','Role has been created');
         return back();
     }
 
@@ -83,7 +83,7 @@ class RoleController extends Controller
             'slug'=>Str::slug($request->roleName)
         ]);
         $role->update($data);
-        session()->flash('updated','Role has been created');
+        session()->flash('message','Role has been created');
         return redirect('/admin/roles');
     }
 
@@ -97,7 +97,7 @@ class RoleController extends Controller
     {
         $role = Role::find($id);
         $role->delete();
-        session()->flash('deleted','Role has been deleted');
+        session()->flash('message','Role has been deleted');
         return redirect('/admin/roles');
     }
 }

@@ -208,6 +208,7 @@
                 }
             });
         });
+        $(".alert").fadeOut(2000);
     </script>
 </body>
 

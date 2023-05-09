@@ -6,12 +6,17 @@
 
 @section('body')
     <div class="row my-3">
+        @if (session('message'))
+        <div class="alert alert-success">
+            {{session('message')}}
+        </div>
+        @endif
         <div class="col-md-5">
             <form action="{{route('categories.store')}}" method="post">
                 @csrf
                 <div>
                     <label>
-                        <input type="text" class="form-control" name="name" placeholder="category">
+                        <input type="text" class="form-control" name="name" placeholder="New category" required>
                     </label>
                 </div>
                 <div class="my-2">

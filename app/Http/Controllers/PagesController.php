@@ -53,16 +53,12 @@ class PagesController extends Controller
         $request->validated();
         $input = $request->all();
         $input['user_id'] = auth()->user()->id;
-        $input['category_id'] = intval($request->input('category'));
-        if ($file = $request->file('file')) {
-            $fileName = $file->getClientOriginalName();
-            $file->move('images', $fileName);
-            $input['path'] = $fileName;
+        $input['category_id'] = intval($request->input('post-category'));
+        if ($request->hasFile('file')) {
+            $input['path'] = $request->file('file')->store('images','public');
         }
         Post::create($input);
-        // $category_id = $request->input('category');
-        // $post->category()->attach(intval($category_id));
-        session()->flash('created', 'Post was created');
+        session()->flash('message', 'Post was created');
         return redirect('/admin/posts');
     }
 
@@ -102,7 +98,7 @@ class PagesController extends Controller
         $request->validated();
         $post = Post::find($id);
         $post->update($request->all());
-        session()->flash('updated', 'Post was updated');
+        session()->flash('message', 'Post was updated');
         return redirect('/admin/posts');
     }
 
@@ -116,7 +112,7 @@ class PagesController extends Controller
     {
         $post = Post::find($id);
         $post->delete();
-        session()->flash('deleted', 'Post was deleted');
+        session()->flash('message', 'Post was deleted');
         return back();
     }
 }

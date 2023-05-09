@@ -25,6 +25,7 @@ class PostRequest extends FormRequest
     {
         return [
             'title' => 'required|alpha_dash|max:100',
+            'post-category'=> 'required',
             'body' => 'required|alpha_dash|max:10000'
         ];
     }

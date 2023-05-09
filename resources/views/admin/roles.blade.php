@@ -4,19 +4,9 @@
 <div class="container-md">
     <div class="row text-center">
         <div class="col-md-5">
-            @if (session('created'))
+            @if (session('message'))
             <div class="alert alert-success">
-                {{session('created')}}
-            </div>
-            @endif
-            @if (session('updated'))
-            <div class="alert alert-success">
-                {{session('updated')}}
-            </div>
-            @endif
-            @if (session('deleted'))
-            <div class="alert alert-danger">
-                {{session('deleted')}}
+                {{session('message')}}
             </div>
             @endif
         </div>
