@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.admin')
 @section('body')
     <div class="row text-center">
         @if (session('created_user'))
