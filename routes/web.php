@@ -21,24 +21,28 @@ use App\Http\Controllers\ProfileController;
 Route::get('/', [PagesController::class, 'index'])->name('welcome');
 Route::resource('posts', PagesController::class);
 
-Route::middleware(['auth', 'verified', 'moderator'])->group(function () {
-    Route::get('/admin', [AdminController::class, 'showMain'])->name('dashboard');
-    Route::get('/admin/posts', [AdminController::class, 'showPosts']);
-    Route::delete('/admin/posts/delete', [AdminController::class, 'deleteAll']);
-    Route::resource('/admin/categories', CategoryController::class);
-});
-
-Route::middleware(['auth', 'verified', 'admin'])->group(function () {
-    Route::resource('/admin/users', AdminController::class);
-    Route::put('/admin/{user}/attach', [AdminController::class, 'attach'])->name('user.attach');
-    Route::put('/admin/{user}/detach', [AdminController::class, 'detach'])->name('user.detach');
-    Route::resource('/admin/roles', RoleController::class);
-});
-
 Route::middleware('auth')->group(function () {
-    Route::get('/admin/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/admin/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/admin/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::prefix('/admin')->group(function () {
+        Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+        Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+        Route::middleware(['verified'])->group(function () {
+            Route::middleware(['moderator'])->group(function () {
+                Route::get('', [AdminController::class, 'showMain'])->name('dashboard');
+                Route::get('/posts', [AdminController::class, 'showPosts']);
+                Route::delete('/posts/delete', [AdminController::class, 'deleteAll']);
+                Route::resource('/categories', CategoryController::class);
+            });
+
+            Route::middleware(['admin'])->group(function () {
+                Route::resource('/users', AdminController::class);
+                Route::put('/{user}/attach', [AdminController::class, 'attach'])->name('user.attach');
+                Route::put('/{user}/detach', [AdminController::class, 'detach'])->name('user.detach');
+                Route::resource('/roles', RoleController::class);
+            });
+        });
+    });
 });
 
 require __DIR__ . '/auth.php';
